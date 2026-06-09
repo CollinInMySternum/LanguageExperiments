@@ -1,0 +1,16 @@
+// The following is a pseudo-language I am trying to write, similar to HLSL or C++. No objects. Only data
+
+float fun2(int x2, int y2) {
+    return x2 + y2;
+}
+
+int fun(int x1, int y1) {
+    if(x == y) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+return x(0, 0);
