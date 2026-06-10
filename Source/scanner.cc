@@ -75,18 +75,30 @@ public:
 
     void TokenizeNumber()
     {
+        bool isFloat = false;
+
         while (IsDigit(Peek()))
             Advance();
 
         if (Peek() == '.' && IsDigit(PeekNext()))
         {
+            isFloat = true;
             Advance();
 
             while (IsDigit(Peek()))
                 Advance();
         }
 
-        AddToken(NUMBER, source.substr(start, current - start));
+        std::string numberStr = source.substr(start, current - start);
+
+        if (isFloat)
+        {
+            AddToken(NUMBER, LiteralValue(std::stod(numberStr)));
+        }
+        else
+        {
+            AddToken(NUMBER, LiteralValue(std::stol(numberStr)));
+        }
     }
 
     void TokenizeIdentifier()
@@ -221,10 +233,10 @@ public:
 
     void AddToken(TokenType type)
     {
-        AddToken(type, "");
+        AddToken(type, LiteralValue());
     }
 
-    void AddToken(TokenType type, string literal)
+    void AddToken(TokenType type, LiteralValue literal)
     {
         string text = source.substr(start, current - start);
         tokens.push_back(Token(type, text, literal, line));

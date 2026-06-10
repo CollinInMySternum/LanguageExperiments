@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    std::filebuf fb;
+    filebuf fb;
 
     string fileString = "";
 
@@ -21,12 +21,12 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    if (fb.open(argv[1], std::ios::in))
+    if (fb.open(argv[1], ios::in))
     {
         cout << "Found file '" << argv[1] << "' in the current directory.\n";
 
-        std::istream is(&fb);
-        std::stringstream buffer;
+        istream is(&fb);
+        stringstream buffer;
         buffer << is.rdbuf();
         fileString = buffer.str();
 
